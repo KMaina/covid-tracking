@@ -12,8 +12,8 @@ router = DefaultRouter()
 router.register('profile',ProfileViewSet,basename='profile')
 
 urlpatterns=[
-    path('viewset/',include(router.urls)),
-    path('viewset/<int:id>',include(router.urls)),
+    path('',include(router.urls)),
+    path('<int:id>',include(router.urls)),
 ]
 
 if settings.DEBUG:

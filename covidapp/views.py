@@ -15,6 +15,5 @@ from rest_framework import viewsets
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
