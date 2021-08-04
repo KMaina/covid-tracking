@@ -18,12 +18,12 @@ class Profile(models.Model):
         return f'{self.user.username} profile'
 
 class Location(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='location') 
     name = models.CharField(max_length=60,blank=True)
 
 
 class PatientInput(models.Model):  
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient')    
     name = models.CharField(max_length=300,blank=True)
     symptoms = models.TextField(max_length=1000,blank=True)
     location = models.ForeignKey(Location,on_delete=models.CASCADE,related_name='location')
@@ -32,25 +32,25 @@ class PatientInput(models.Model):
         return f'{self.user.username} profile'
 
 class DoctorsInput(models.Model):
-    res=(
-        (Positive, 'Positive'),
-        (Negative, 'Negative'),   
-    ),
-    rec=(
-        (Hospital Care,'Hospital Care'),
-        (Home Care, 'Home Care'),   
+    response=(
+        (1, 'Positive'),
+        (2, 'Negative'),   
+    )
+    recomend=(
+        (1,'Hospital Care'),
+        (2, 'Home Care'),   
     )
     name = models.CharField(max_length=60,blank=True)
-    status = models.CharField(choices=res,default=0,blank=False)
-    recomendations = models.CharField(choices=rec,default=0,blank=False)
+    status = models.IntegerField(choices=response,blank=False,default=0)
+    recomendations = models.IntegerField(choices=recomend,blank=False,default=0)
     remarks = models.TextField(max_length=1000,blank=True)
 
 
 
 class ContactTracing(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='contact') 
     name = models.CharField(max_length=60, blank=True)
-    contact = models.IntegerField(max_length=13,blank=False)
+    contact = models.IntegerField(blank=False)
     date = models.DateField(null=True)
 
 
