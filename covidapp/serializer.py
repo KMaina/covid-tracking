@@ -33,4 +33,4 @@ class ProfileSerializer(serializers.ModelSerializer):
     profile_pic = CloudinaryField('image')
     class Meta:
         model = Profile
-        fields = ('name','location','bio','profile_pic')   
+        fields = ('user','name','location','bio','profile_pic')
