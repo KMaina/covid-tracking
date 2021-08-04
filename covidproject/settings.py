@@ -1,17 +1,12 @@
 # type:ignore
 from pathlib import Path
 import os
-import cloudinary
 from pathlib import Path
 from decouple import config,Csv
 import dj_database_url
 import django_heroku
 
-cloudinary.config( 
-  cloud_name = config('CLOUD_NAME'), 
-  api_key = config('API_KEY'),
-  api_secret = config('API_SECRET')
-)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'covidapp',
     'bootstrap4',
-    'cloudinary',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
@@ -155,10 +149,5 @@ REST_FRAMEWORK = {
     )
 }
 
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 django_heroku.settings(locals())

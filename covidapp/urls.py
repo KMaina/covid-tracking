@@ -14,6 +14,8 @@ router.register('profile',ProfileViewSet,basename='profile')
 urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
+    path('api/patients/', views.PatientInputList.as_view())
+
 ]
 
 if settings.DEBUG:

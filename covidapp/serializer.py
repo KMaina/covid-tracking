@@ -1,13 +1,15 @@
 # type:ignore
+from django.db.models import fields
 from rest_framework import serializers
-from .models import Profile
-from cloudinary.models import CloudinaryField
-
-
+from .models import PatientInput, Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    profile_pic = CloudinaryField('image')
     class Meta:
         model = Profile
-        fields = ('name','location','bio','profile_pic')   
+        fields = ('name','location','bio','profile_pic')  
+
+class PatientInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientInput
+        fields = ('name', 'symptoms', 'location')
