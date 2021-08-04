@@ -6,6 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from .views import ProfileViewSet
+from .views import RegisterAPI
+
 
 router = DefaultRouter()
 
@@ -14,6 +16,8 @@ router.register('profile',ProfileViewSet,basename='profile')
 urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
+    path('user/register/', RegisterAPI.as_view(), name='register'),
+
 ]
 
 if settings.DEBUG:
