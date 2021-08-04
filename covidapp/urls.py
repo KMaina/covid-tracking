@@ -23,7 +23,6 @@ urlpatterns=[
     path('user/login/', LoginAPI.as_view(), name='login'),
     path('user/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('user/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
-
 ]
 
 if settings.DEBUG:
