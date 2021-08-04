@@ -1,34 +1,46 @@
 # type:ignore
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Profile
 from cloudinary.models import CloudinaryField
 
-from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
+User = get_user_model()
+
+    # @transaction.atomic
+    # def save(self,validated_data):
+    #     user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+    #     # user = super().save()
+    #     user.contact = self.data.get('contact')
+    #     user.role = self.data.get('role')
+
+    #     user.save()
+    #     return user
+
+# User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields =  ['id','username','email','phone','password','is_doctor','is_patient','role']
+        # fields = ('id', 'username','phone','email')
+        fields =  ['id','username','email','phone','is_doctor','is_patient','role']
 
-User = get_user_model()
 
+# Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        # fields = ('id', 'username','phone', 'email', 'password')
         fields =  ['id','username','email','phone','password','is_doctor','is_patient','role']
         extra_kwargs = {'password': {'write_only': True}}
 
-    @transaction.atomic
-    def save(self):
-        user = super().save()
-        user.contact = self.data.get('contact')
-        user.role = self.data.get('role')
-        user.save()
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'], phone = self.data.get('phone'),role = self.data.get('role'),
+        is_doctor = self.data.get('is_doctor'),is_patient = self.data.get('is_patient'))
+
+
         return user
-
-
 class ProfileSerializer(serializers.ModelSerializer):
     profile_pic = CloudinaryField('image')
     class Meta:
