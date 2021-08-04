@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from .views import ProfileViewSet
 from .views import RegisterAPI
+from knox import views as knox_views
+from .views import LoginAPI
 
 
 router = DefaultRouter()
@@ -17,6 +19,9 @@ urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
     path('user/register/', RegisterAPI.as_view(), name='register'),
+    path('user/login/', LoginAPI.as_view(), name='login'),
+    path('user/logout/', knox_views.LogoutView.as_view(), name='logout'),
+    path('user/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
 
 ]
 
