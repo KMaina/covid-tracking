@@ -5,11 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm,UpdateUserForm,UpdateProfileForm
-from .models import PatientInput, Profile, User
+from .models import Location, PatientInput, Profile, User
 from .email import send_welcome_email
 #api imports
 from .permissions import IsAdminOrReadOnly
-from .serializer import PatientInputSerializer, ProfileSerializer
+from .serializer import LocationSerializer, PatientInputSerializer, ProfileSerializer
 from .serializer import ProfileSerializer, RegisterSerializer,UserSerializer
 from rest_framework.permissions import IsAdminUser
 from rest_framework import viewsets
@@ -71,3 +71,20 @@ class LoginAPI(KnoxLoginView):
         user = serializer.validated_data['user']
         login(request, user)
         return super(LoginAPI, self).post(request, format=None)
+
+class LocationList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+
+    def get(self, request, format=None):
+        locations = Location.objects.all()
+        serializer = LocationSerializer(locations, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializers = LocationSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,7 +1,7 @@
 # type:ignore
 from django.db.models import fields
 from rest_framework import serializers
-from .models import PatientInput, Profile
+from .models import Location, PatientInput, Profile
 from django.contrib.auth.models import User
 from .models import Profile
 from cloudinary.models import CloudinaryField
@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 
 User = get_user_model()
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -28,7 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
         return user
-        
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -38,3 +39,9 @@ class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
         fields = ('name', 'symptoms', 'location')
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = '__all__'
+

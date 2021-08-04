@@ -19,6 +19,7 @@ urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
     path('api/patients/', views.PatientInputList.as_view()),
+    path('api/location/', views.LocationList.as_view()),
     path('user/register/', RegisterAPI.as_view(), name='register'),
     path('user/login/', LoginAPI.as_view(), name='login'),
     path('user/logout/', knox_views.LogoutView.as_view(), name='logout'),
