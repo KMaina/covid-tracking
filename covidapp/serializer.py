@@ -8,30 +8,15 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 
 User = get_user_model()
-
-    # @transaction.atomic
-    # def save(self,validated_data):
-    #     user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-    #     # user = super().save()
-    #     user.contact = self.data.get('contact')
-    #     user.role = self.data.get('role')
-
-    #     user.save()
-    #     return user
-
-# User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # fields = ('id', 'username','phone','email')
         fields =  ['id','username','email','phone','is_doctor','is_patient','role']
 
 
-# Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # fields = ('id', 'username','phone', 'email', 'password')
         fields =  ['id','username','email','phone','password','is_doctor','is_patient','role']
         extra_kwargs = {'password': {'write_only': True}}
 
