@@ -16,3 +16,42 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} profile'
+
+class Location(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
+    name = models.CharField(max_length=60,blank=True)
+
+
+class PatientInput(models.Model):  
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')    
+    name = models.CharField(max_length=300,blank=True)
+    symptoms = models.TextField(max_length=1000,blank=True)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE,related_name='location')
+
+    def __str__(self):
+        return f'{self.user.username} profile'
+
+class DoctorsInput(models.Model):
+    res=(
+        (Positive, 'Positive'),
+        (Negative, 'Negative'),   
+    ),
+    rec=(
+        (Hospital Care,'Hospital Care'),
+        (Home Care, 'Home Care'),   
+    )
+    name = models.CharField(max_length=60,blank=True)
+    status = models.CharField(choices=res,default=0,blank=False)
+    recomendations = models.CharField(choices=rec,default=0,blank=False)
+    remarks = models.TextField(max_length=1000,blank=True)
+
+
+
+class ContactTracing(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
+    name = models.CharField(max_length=60, blank=True)
+    contact = models.IntegerField(max_length=13,blank=False)
+    date = models.DateField(null=True)
+
+
+
