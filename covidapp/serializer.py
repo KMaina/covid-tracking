@@ -38,7 +38,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
-        fields = ('name', 'symptoms', 'location')
+        fields = ('__all__')
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
