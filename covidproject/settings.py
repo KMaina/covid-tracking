@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary',
     'crispy_forms',
-    'rest_framework',
     'rest_framework.authtoken',
-      'knox',
+     'rest_framework',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +132,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+        # 'rest_framework.authentication.TokenAuthentication',
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
@@ -152,12 +153,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-            'knox.auth.TokenAuthentication',
 
-    )
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'knox.auth.TokenAuthentication',
+    ]
 }
 
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS')
