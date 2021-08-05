@@ -40,7 +40,7 @@ class DoctorInputSerializer(serializers.ModelSerializer):
 class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
-        fields = ('user','name','symptomps','location')
+        fields = ('user','name','symptoms','location')
 
 class ContactTracingSerializer(serializers.ModelSerializer):
     class Meta:
