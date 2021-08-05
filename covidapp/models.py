@@ -67,7 +67,7 @@ class DoctorsInput(models.Model):
 
 
 class ContactTracing(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='contact') 
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
     name = models.CharField(max_length=60, blank=True)
     contact = models.IntegerField(blank=False)
     date = models.DateField(null=True)
