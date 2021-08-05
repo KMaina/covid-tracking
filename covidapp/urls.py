@@ -5,7 +5,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from .views import ProfileViewSet
+from .views import ProfileViewSet,DoctorsInputViewSet,PatientInputViewSet,ContactTracingViewSet,LocationViewSet
 from .views import RegisterAPI
 from knox import views as knox_views
 from .views import LoginAPI
@@ -14,6 +14,10 @@ from .views import LoginAPI
 router = DefaultRouter()
 
 router.register('profile',ProfileViewSet,basename='profile')
+router.register('location',LocationViewSet,basename='location')
+router.register('contact',ContactTracingViewSet,basename='contact')
+router.register('doctorsinpunt',DoctorsInputViewSet,basename='doctorsinpunt')
+router.register('patientinpunt',PatientInputViewSet,basename='patientinpunt')
 
 urlpatterns=[
     path('',include(router.urls)),
