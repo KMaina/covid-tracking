@@ -1,7 +1,7 @@
 # type:ignore
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Profile,DoctorsInput,Location,PatientInput,ContactTracing
+from .models import Profile,DoctorsInput,PatientInput,ContactTracing
 from cloudinary.models import CloudinaryField
 
 from django.contrib.auth import get_user_model
@@ -46,7 +46,3 @@ class ContactTracingSerializer(serializers.ModelSerializer):
         model = ContactTracing
         fields = ('user','name','contact','date')
 
-class LocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Location
-        fields = ('user','name')

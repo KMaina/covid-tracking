@@ -5,11 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm,UpdateUserForm,UpdateProfileForm
-from .models import ContactTracing, DoctorsInput, Location, PatientInput, Profile, User
+from .models import ContactTracing, DoctorsInput, PatientInput, Profile, User
 from .email import send_welcome_email
 #api imports
 from .permissions import IsAdminOrReadOnly
-from .serializer import ProfileSerializer, RegisterSerializer,UserSerializer,LocationSerializer,DoctorInputSerializer,PatientInputSerializer,ContactTracingSerializer
+from .serializer import ProfileSerializer, RegisterSerializer,UserSerializer,DoctorInputSerializer,PatientInputSerializer,ContactTracingSerializer
 from rest_framework.permissions import IsAdminUser
 from rest_framework import viewsets, generics,permissions
 from rest_framework.response import Response
@@ -28,10 +28,6 @@ from knox.views import LoginView as KnoxLoginView
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-
-class LocationViewSet(viewsets.ModelViewSet):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
 
 class ContactTracingViewSet(viewsets.ModelViewSet):
     queryset = ContactTracing.objects.all()
