@@ -10,8 +10,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     role_choices = (('is_doctor','Doctor'),('is_patient','Patient'))
 
-    is_doctor = models.BooleanField(default=False)
-    is_patient = models.BooleanField(default=True)
+    # is_doctor = models.BooleanField(default=False)
+    # is_patient = models.BooleanField(default=True)
     role = models.CharField(max_length=20, choices=role_choices,null=False)
     phone = models.IntegerField(blank=False,default=+254)
 
