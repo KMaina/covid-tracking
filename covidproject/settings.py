@@ -78,6 +78,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'covidproject.wsgi.application'
 
 
+
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
