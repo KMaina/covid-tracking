@@ -13,7 +13,7 @@ class User(AbstractUser):
     # is_doctor = models.BooleanField(default=False)
     # is_patient = models.BooleanField(default=True)
     role = models.CharField(max_length=20, choices=role_choices,null=False)
-    phone = models.IntegerField(blank=False,default=+254)
+    phone = models.IntegerField(blank=True,default=+254)
 
 
 class Doctor(models.Model):
