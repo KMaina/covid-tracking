@@ -4,8 +4,27 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from datetime import datetime as dt
+from django.contrib.auth.models import AbstractUser
 
 
+class User(AbstractUser):
+    role_choices = (('is_doctor','Doctor'),('is_patient','Patient'))
+
+    is_doctor = models.BooleanField(default=False)
+    is_patient = models.BooleanField(default=True)
+    role = models.CharField(max_length=20, choices=role_choices,null=False)
+    phone = models.IntegerField(blank=False,default=+254)
+
+
+class Doctor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True),
+    def __str__(self):
+        return self.user.username
+
+class Patient(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True),
+    def __str__(self):
+        return self.user.username
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
