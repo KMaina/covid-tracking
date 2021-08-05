@@ -135,7 +135,7 @@ USE_L10N = True
 
 USE_TZ = True
         # 'rest_framework.authentication.TokenAuthentication',
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
 )
