@@ -45,7 +45,7 @@ class PatientInput(models.Model):
     location = models.CharField(max_length=300,blank=False,default='location')
 
     def __str__(self):
-        return f'{self.user.username} profile'
+        return f'{self.user.username} patient'
 
 class DoctorsInput(models.Model):
     response=(
