@@ -167,6 +167,10 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ]
 }
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'covidapp.utils.jwt_response_payload_handler', #app_name is name of the app which contains utils.py
+}
 
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 # EMAIL_HOST = config('EMAIL_HOST')
