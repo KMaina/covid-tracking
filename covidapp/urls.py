@@ -23,9 +23,9 @@ urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
     path('register/', RegisterAPI.as_view(), name='register'),
-    path('token/', LoginAPI.as_view(), name='login'),
+    path('login/', LoginAPI.as_view(), name='login'),
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),    path('api-token-auth/', obtain_jwt_token),
-    path('login/',CustomAuthToken.as_view(),name='token'),
+    path('token/',CustomAuthToken.as_view(),name='token'),
 ]
 
 if settings.DEBUG:
