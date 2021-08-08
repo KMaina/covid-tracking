@@ -10,6 +10,7 @@ from django.db import transaction
 User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
+        many=True
         model = User
         fields =  ['id','username','email','phone','role']
 
