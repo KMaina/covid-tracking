@@ -22,10 +22,10 @@ router.register('user',UserViewSet,basename='user')
 urlpatterns=[
     path('',include(router.urls)),
     path('<int:id>',include(router.urls)),
-    path('user/register/', RegisterAPI.as_view(), name='register'),
-    path('user/login/', LoginAPI.as_view(), name='login'),
-    path('user/logout/', knox_views.LogoutView.as_view(), name='logout'),
-    path('user/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
+    path('register/', RegisterAPI.as_view(), name='register'),
+    path('login/', LoginAPI.as_view(), name='login'),
+    path('logout/', knox_views.LogoutView.as_view(), name='logout'),
+    path('logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
 
 ]
 
