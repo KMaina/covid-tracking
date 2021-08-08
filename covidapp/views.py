@@ -1,11 +1,12 @@
-# type:ignore 
+# type:ignore
+from django.contrib.auth import get_user_model 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http  import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm,UpdateUserForm,UpdateProfileForm
-from .models import ContactTracing, DoctorsInput, PatientInput, Profile, User
+from .models import ContactTracing, DoctorsInput, PatientInput, Profile
 from .email import send_welcome_email
 #api imports
 from .permissions import IsAdminOrReadOnly
@@ -24,6 +25,7 @@ from django.contrib.auth import login
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 
+User = get_user_model()
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -41,7 +43,9 @@ class PatientInputViewSet(viewsets.ModelViewSet):
     queryset = PatientInput.objects.all()
     serializer_class = PatientInputSerializer
 
-
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer

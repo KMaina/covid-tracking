@@ -69,5 +69,8 @@ class ContactTracing(models.Model):
     contact = models.IntegerField(blank=False)
     date = models.DateField(null=True)
 
+    def __str__(self):
+        return f'{self.user.username}'
+
 
 
