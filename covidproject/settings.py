@@ -28,6 +28,7 @@ DATABASES = {
            default=config('DATABASE_URL')
        )
 }
+
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -135,7 +136,7 @@ USE_L10N = True
 
 USE_TZ = True
         # 'rest_framework.authentication.TokenAuthentication',
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
 )
@@ -165,6 +166,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'knox.auth.TokenAuthentication',
     ]
+}
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'covidapp.utils.jwt_response_payload_handler', #app_name is name of the app which contains utils.py
 }
 
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS')

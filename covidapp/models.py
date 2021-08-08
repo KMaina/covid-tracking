@@ -26,11 +26,21 @@ class Patient(models.Model):
     def __str__(self):
         return self.user.username
 
+class ContactTracing(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    name = models.CharField(max_length=60, blank=True)
+    contact = models.IntegerField(blank=False,unique=True)
+    date = models.DateField(null=True)
+
+    def __str__(self):
+        return f'{self.user.username}'
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=255, default="Add Bio....", blank=True)
     name = models.CharField(max_length=60,blank=True)
     location = models.CharField(max_length=60,blank=True)
+    contact = models.ManyToManyField(ContactTracing)
     profile_pic= CloudinaryField('image')
 
     def __str__(self):
@@ -45,7 +55,7 @@ class PatientInput(models.Model):
     location = models.CharField(max_length=300,blank=False,default='location')
 
     def __str__(self):
-        return f'{self.user.username} profile'
+        return f'{self.user.username} patient'
 
 class DoctorsInput(models.Model):
     response=(
@@ -61,13 +71,6 @@ class DoctorsInput(models.Model):
     recomendations = models.CharField(choices=recomend,blank=False,default=0,max_length=1000)
     remarks = models.TextField(max_length=1000,blank=True)
 
-
-
-class ContactTracing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
-    name = models.CharField(max_length=60, blank=True)
-    contact = models.IntegerField(blank=False)
-    date = models.DateField(null=True)
 
 
 
