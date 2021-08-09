@@ -49,7 +49,7 @@ class Profile(models.Model):
 
 
 class PatientInput(models.Model):  
-    user = models.ForeignKey(User, on_delete=models.CASCADE)    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient')    
     name = models.CharField(max_length=300,blank=True)
     symptoms = models.TextField(max_length=1000,blank=True)
     location = models.CharField(max_length=300,blank=False,default='location')
