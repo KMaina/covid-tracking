@@ -36,6 +36,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class ContactTracingViewSet(viewsets.ModelViewSet):
     queryset = ContactTracing.objects.all()
+    print(queryset)
     serializer_class = ContactTracingSerializer
 
 class DoctorsInputViewSet(viewsets.ModelViewSet):

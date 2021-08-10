@@ -5,7 +5,7 @@ from .models import Profile,DoctorsInput,PatientInput,ContactTracing
 from cloudinary.models import CloudinaryField
 
 from django.contrib.auth import get_user_model
-from django.db import transaction
+from django.db import models, transaction
 
 User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
@@ -35,15 +35,15 @@ class ProfileSerializer(serializers.ModelSerializer):
 class DoctorInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorsInput
-        fields = ('name','status','recomendations','remarks')
+        fields = ('id','name','status','recomendations','remarks')
 
 class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
-        fields = ('user','name','symptoms','location')
+        fields = ('id','user','name','symptoms','location')
 
 class ContactTracingSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactTracing
-        fields = ('user','name','contact','date')
+        fields = ('user','id','name','contact','date')
 
