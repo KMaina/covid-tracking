@@ -3,7 +3,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-from datetime import datetime as dt
+from datetime import date, datetime as dt
 from django.contrib.auth.models import AbstractUser
 
 
@@ -53,6 +53,8 @@ class PatientInput(models.Model):
     name = models.CharField(max_length=300,blank=True)
     symptoms = models.TextField(max_length=1000,blank=True)
     location = models.CharField(max_length=300,blank=False,default='location')
+    date_modified = models.DateField(auto_now=True,)
+    date = models.DateField(null=True)
 
     def __str__(self):
         return f'{self.user.username} patient'
@@ -70,6 +72,8 @@ class DoctorsInput(models.Model):
     status = models.CharField(choices=response,blank=False,default=0,max_length=200)
     recomendations = models.CharField(choices=recomend,blank=False,default=0,max_length=1000)
     remarks = models.TextField(max_length=1000,blank=True)
+    date_modified = models.DateField(auto_now=True,)
+    date = models.DateField(null=True)
 
 
 

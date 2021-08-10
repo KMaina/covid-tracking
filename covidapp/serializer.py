@@ -35,12 +35,12 @@ class ProfileSerializer(serializers.ModelSerializer):
 class DoctorInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorsInput
-        fields = ('id','name','status','recomendations','remarks')
+        fields = ('id','name','status','recomendations','remarks','date','date_modified')
 
 class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
-        fields = ('id','user','name','symptoms','location')
+        fields = ('id','user','name','symptoms','location','date','date_modified')
 
 class ContactTracingSerializer(serializers.ModelSerializer):
     class Meta:
