@@ -27,7 +27,7 @@ class Patient(models.Model):
         return self.user.username
 
 class ContactTracing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=60, blank=True)
     contact = models.IntegerField(blank=False,unique=True)
     date = models.DateField(null=True)

@@ -27,23 +27,34 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-
+from rest_framework import filters
 User = get_user_model()
-
+'''
+     view set returning all CRUD method on profile model
+'''
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+'''
+     view set returning all CRUD method on profile model
+'''
 class ContactTracingViewSet(viewsets.ModelViewSet):
+    search_fields = ['name','contact','user__username']
+    filter_backends = (filters.SearchFilter,)
     queryset = ContactTracing.objects.all()
     print(queryset)
     serializer_class = ContactTracingSerializer
 
 class DoctorsInputViewSet(viewsets.ModelViewSet):
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     queryset = DoctorsInput.objects.all()
     serializer_class = DoctorInputSerializer
 
 class PatientInputViewSet(viewsets.ModelViewSet):
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     queryset = PatientInput.objects.all()
     serializer_class = PatientInputSerializer
 
