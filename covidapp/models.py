@@ -6,12 +6,11 @@ from cloudinary.models import CloudinaryField
 from datetime import date, datetime as dt
 from django.contrib.auth.models import AbstractUser
 
-
+'''
+    abstarct user model for patients and doctors
+'''
 class User(AbstractUser):
     role_choices = (('is_doctor','Doctor'),('is_patient','Patient'))
-
-    # is_doctor = models.BooleanField(default=False)
-    # is_patient = models.BooleanField(default=True)
     role = models.CharField(max_length=20, choices=role_choices,null=False)
     phone = models.IntegerField(blank=False,default=0)
 
@@ -25,7 +24,9 @@ class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True),
     def __str__(self):
         return self.user.username
-
+'''
+    contact tracing model for positive patients
+'''
 class ContactTracing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=60, blank=True)
@@ -35,6 +36,9 @@ class ContactTracing(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+'''
+    profile model to all user
+'''
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=255, default="Add Bio....", blank=True)
@@ -47,7 +51,9 @@ class Profile(models.Model):
         return f'{self.user.username} profile'
 
 
-
+'''
+    patient info table model
+'''
 class PatientInput(models.Model):  
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient')    
     name = models.CharField(max_length=300,blank=True)
@@ -58,7 +64,9 @@ class PatientInput(models.Model):
 
     def __str__(self):
         return f'{self.user.username} patient'
-
+'''
+    doctor info table model
+'''
 class DoctorsInput(models.Model):
     response=(
         ('positive', 'Positive'),

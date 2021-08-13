@@ -37,7 +37,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
 '''
-     view set returning all CRUD method on profile model
+     view set returning all CRUD and search method on profile model
 '''
 class ContactTracingViewSet(viewsets.ModelViewSet):
     search_fields = ['name','contact','user__username']
@@ -45,23 +45,36 @@ class ContactTracingViewSet(viewsets.ModelViewSet):
     queryset = ContactTracing.objects.all()
     print(queryset)
     serializer_class = ContactTracingSerializer
-
+'''
+     view set returning all CRUD and search method on doctors input model
+'''
 class DoctorsInputViewSet(viewsets.ModelViewSet):
     search_fields = ['name']
     filter_backends = (filters.SearchFilter,)
     queryset = DoctorsInput.objects.all()
     serializer_class = DoctorInputSerializer
 
+'''
+     view set returning all CRUD and search method on patient input model
+'''
 class PatientInputViewSet(viewsets.ModelViewSet):
     search_fields = ['name']
     filter_backends = (filters.SearchFilter,)
     queryset = PatientInput.objects.all()
     serializer_class = PatientInputSerializer
 
+'''
+    view set returning all CRUD and search method on user model
+'''
 class UserViewSet(viewsets.ModelViewSet):
+    search_fields = ['email','username']
+    filter_backends = (filters.SearchFilter,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+'''
+    registration api view to post new users
+'''
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
@@ -73,7 +86,9 @@ class RegisterAPI(generics.GenericAPIView):
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
         "token": AuthToken.objects.create(user)[1]
         })
-
+'''
+    Login  api view that inherits from KnoxLoginView to log in users
+'''
 class LoginAPI(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
 
@@ -83,7 +98,9 @@ class LoginAPI(KnoxLoginView):
         user = serializer.validated_data['user']
         login(request, user)
         return super(LoginAPI, self).post(request, format=None)
-
+'''
+    custom api view to post user, generate token, confim token and login users
+'''
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(
