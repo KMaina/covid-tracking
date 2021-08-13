@@ -60,7 +60,6 @@ class PatientInput(models.Model):
     symptoms = models.TextField(max_length=1000,blank=True)
     location = models.CharField(max_length=300,blank=False,default='location')
     date_modified = models.DateField(auto_now=True,)
-    date = models.DateField(null=True)
 
     def __str__(self):
         return f'{self.user.username} patient'
@@ -81,8 +80,5 @@ class DoctorsInput(models.Model):
     recomendations = models.CharField(choices=recomend,blank=False,default=0,max_length=1000)
     remarks = models.TextField(max_length=1000,blank=True)
     date_modified = models.DateField(auto_now=True,)
-    date = models.DateField(null=True)
-
-
 
 
