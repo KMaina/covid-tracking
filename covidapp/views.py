@@ -43,7 +43,6 @@ class ContactTracingViewSet(viewsets.ModelViewSet):
     search_fields = ['name','contact','user__username']
     filter_backends = (filters.SearchFilter,)
     queryset = ContactTracing.objects.all()
-    print(queryset)
     serializer_class = ContactTracingSerializer
 '''
      view set returning all CRUD and search method on doctors input model
