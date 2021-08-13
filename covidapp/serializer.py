@@ -43,7 +43,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class DoctorInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorsInput
-        fields = ('id','name','status','recomendations','remarks','date','date_modified')
+        fields = ('id','name','status','recomendations','remarks','date_modified')
 
 '''
     patient's info serializer class
@@ -51,7 +51,7 @@ class DoctorInputSerializer(serializers.ModelSerializer):
 class PatientInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientInput
-        fields = ('id','user','name','symptoms','location','date','date_modified')
+        fields = ('id','user','name','symptoms','location','date_modified')
 
 '''
     contact tracing serializer class
